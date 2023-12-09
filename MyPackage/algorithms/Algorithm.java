@@ -5,11 +5,11 @@ import MyPackage.MyProcess;
 
 public abstract class Algorithm {
     public PriorityQueue<MyProcess> q;
-    public static boolean preemptive;
-    private double throughput;
-    private double AvgTurnAroundTime;
-    private double AvgWaitingTime;
-    private double AvgResponseTime;
+    protected static boolean preemptive;
+    protected double throughput=0;
+    protected double AvgTurnAroundTime=0;
+    protected double AvgWaitingTime=0;
+    protected double AvgResponseTime=0;
     
  
 	// getters
@@ -25,6 +25,9 @@ public abstract class Algorithm {
     public double getThroughput() {
         return throughput;
     }
+    public static boolean getPreemptive(){
+        return preemptive;
+    }
     // setters
     public void setAvgResponseTime(double avgResponseTime) {
         AvgResponseTime = avgResponseTime;
@@ -34,9 +37,6 @@ public abstract class Algorithm {
     }
     public void setAvgWaitingTime(double avgWaitingTime) {
         AvgWaitingTime = avgWaitingTime;
-    }
-    public static void setPreemptive(boolean preemptive) {
-        Algorithm.preemptive = preemptive;
     }
     public void setThroughput(double throughput) {
         this.throughput = throughput;
