@@ -30,11 +30,11 @@ public void run(){
         ArrayList<MyProcess> arr = new ArrayList<>();
         CollectiveOut collectiveOut = new CollectiveOut(new ArrayList<MyProcess>());
 
-        arr.add(new MyProcess(0, 5+10, 0));
-        arr.add(new MyProcess(0, 4+10, 1));
-        arr.add(new MyProcess(0, 7+10, 2));
+        arr.add(new MyProcess(2, 5+10, 0));
+        arr.add(new MyProcess(3, 4+10, 1));
+        arr.add(new MyProcess(4, 7+10, 2));
         arr.add(new MyProcess(0, 3+10, 3));
-        arr.add(new MyProcess(3, 100, 4));
+        arr.add(new MyProcess(1, 100, 4));
 
 
         RoundsRobin level1 = new RoundsRobin(arr, 8);
@@ -47,7 +47,9 @@ public void run(){
         level3.run(collectiveOut,time);
         
         collectiveOut.run();
-        System.out.println("STS end its task successfully");
+        System.out.println(" ===================================");
+        System.out.println("|| STS ended its task successfully ||");
+        System.out.println(" ===================================\n");
     }
 
 }

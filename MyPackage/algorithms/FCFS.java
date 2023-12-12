@@ -27,8 +27,8 @@ public class FCFS extends Algorithm{
 	
 	@Override
 	public Queue<MyProcess> run(CollectiveOut collectiveOut,SharedTime t0) {
-		System.out.println("\n+++++++++++++++++++++++++++++\nin FCFS");
-		System.out.println("+++++++++++++++++++++++++++++");
+		// System.out.println("\n+++++++++++++++++++++++++++++\nin FCFS");
+		// System.out.println("+++++++++++++++++++++++++++++");
 
 		while(!workingQ.isEmpty()){
 			
@@ -46,7 +46,7 @@ public class FCFS extends Algorithm{
 			p.setEndTime(t0.getTime());
 			p.decreaseBurstTimeBy(p.getRemainingBurstTime());
 
-			System.out.println(p);
+			// System.out.println(p);
 		}
 		return null;
 				
