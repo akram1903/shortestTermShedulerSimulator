@@ -15,10 +15,10 @@ public class GenerateProcesses {
 		ArrayList<MyProcess> arr = new ArrayList<MyProcess>();
 		
 		for(int i=0;i<nOfProcesses;i++) {
-			int arrival = Math.abs(r.nextInt()%20);
-			int burst = Math.abs(r.nextInt()%20);
+			int arrival = Math.abs(r.nextInt()%100);
+			int burst = Math.abs(r.nextInt()%100)+1;
 			
-			MyProcess p = new MyProcess(arrival, burst, i);
+			MyProcess p = new MyProcess(arrival, burst, i+1);
 			arr.add(p);
 		}
 		

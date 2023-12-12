@@ -2,17 +2,20 @@ package MyPackage;
 public class MyProcess {
     private int PID;
     private int arrivalTime;
-    private int BurstTime;
+    private int remainingBurstTime;
+    private int burstTime;
     private int turnAroundTime;
     private int waitingTime;
     private int responseTime;
     private int startTime; 
+    private int endTime;
 
     public MyProcess(int arrivalTime,int BurstTime, int PID){
         if(PID<0 || arrivalTime<0 || BurstTime <0)
             throw new ArithmeticException("PID, arrival time or burst time is negative");
         this.PID = PID;
-        this.BurstTime = BurstTime;
+        this.remainingBurstTime = BurstTime;
+        this.burstTime = BurstTime;
         this.arrivalTime = arrivalTime;
     }
 
@@ -21,34 +24,31 @@ public class MyProcess {
     public int getArrivalTime() {
         return arrivalTime;
     }
-    public int getBurstTime() {
-        return BurstTime;
+    public int getRemainingBurstTime() {
+        return remainingBurstTime;
     }
     public int getPID() {
         return PID;
     }
-    public int getResponseTime() {
-        return responseTime;
+    public int getStartTime() {
+        return startTime;
     }
     public int getTurnAroundTime() {
         return turnAroundTime;
     }
-    public int getWaitingTime() {
-        return waitingTime;
+    public int getEndTime() {
+        return endTime;
     }
-    public int getStartTime() {
-        return startTime;
-    }
-
+    
     // setters
     public void setStartTime(int startTime) {
         this.startTime = startTime;
     }
-    public void setBurstTime(int burstTime) {
-        BurstTime = burstTime;
-    }
     public void decreaseBurstTimeBy(int t){
-        BurstTime -= t;
+        remainingBurstTime -= t;
+    }
+    public void increaseTurnAroundTime(int t){
+        turnAroundTime += t;
     }
     public void setResponseTime(int responseTime) {
         this.responseTime = responseTime;
@@ -58,5 +58,27 @@ public class MyProcess {
     }
     public void setWaitingTime(int waitingTime) {
         this.waitingTime = waitingTime;
+    }
+    public void setEndTime(int endTime) {
+        this.endTime = endTime;
+    }
+
+    public String toString(){
+        String s = new String();
+
+        s += "Process: "+ this.PID + '\n';
+        s += "arrival time: "+ this.arrivalTime+ '\n';
+        s += "remaining burst time: "+ this.remainingBurstTime+ '\n';
+        s += "burst time: "+ this.burstTime+ '\n';
+                
+        s += "end time: "+ this.endTime+ '\n';
+        s += "---------------------\n";
+        
+        // s += "turnAroundTime: "+ this.turnAroundTime+ '\n';
+        // s += "responseTime: "+ this.responseTime+ '\n';
+        // s += "waitingTime: "+ this.waitingTime+ '\n';
+        // s += "\n=====================\n";
+
+        return s;
     }
 }

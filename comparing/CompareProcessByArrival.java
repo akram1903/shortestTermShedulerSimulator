@@ -1,6 +1,8 @@
-package MyPackage;
+package comparing;
 
 import java.util.Comparator;
+
+import MyPackage.MyProcess;
 
 public class CompareProcessByArrival implements Comparator<MyProcess>{
 

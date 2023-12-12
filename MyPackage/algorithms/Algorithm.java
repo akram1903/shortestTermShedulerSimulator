@@ -1,47 +1,20 @@
 package MyPackage.algorithms;
 
-import java.util.PriorityQueue;
+import java.util.Queue;
+
 import MyPackage.MyProcess;
+import MyPackage.SharedTime;
 
 public abstract class Algorithm {
-    public PriorityQueue<MyProcess> q;
-    protected static boolean preemptive;
-    protected double throughput=0;
-    protected double AvgTurnAroundTime=0;
-    protected double AvgWaitingTime=0;
-    protected double AvgResponseTime=0;
-    
- 
-	// getters
-    public double getAvgResponseTime() {
-        return AvgResponseTime;
-    }
-    public double getAvgTurnAroundTime() {
-        return AvgTurnAroundTime;
-    }
-    public double getAvgWaitingTime() {
-        return AvgWaitingTime;
-    }
-    public double getThroughput() {
-        return throughput;
-    }
-    public static boolean getPreemptive(){
-        return preemptive;
-    }
-    // setters
-    public void setAvgResponseTime(double avgResponseTime) {
-        AvgResponseTime = avgResponseTime;
-    }
-    public void setAvgTurnAroundTime(double avgTurnAroundTime) {
-        AvgTurnAroundTime = avgTurnAroundTime;
-    }
-    public void setAvgWaitingTime(double avgWaitingTime) {
-        AvgWaitingTime = avgWaitingTime;
-    }
-    public void setThroughput(double throughput) {
-        this.throughput = throughput;
-    }
+    public Queue<MyProcess> workingQ;
+    // protected Integer t0;
 
-    public abstract void run();
+    
+    // public void pushInQ(MyProcess p, CollectiveOut collectiveOut) {
+	// 	this.workingQ.add(p);
+	// 	this.run(collectiveOut);
+	// }
+    // collectiveOut is for finished processes and we return unfinished processes.
+    public abstract Queue<MyProcess> run(CollectiveOut collectiveOut,SharedTime t0);
 
 }
