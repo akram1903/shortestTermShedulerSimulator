@@ -5,8 +5,6 @@ public class MyProcess {
     private int remainingBurstTime;
     private int burstTime;
     private int turnAroundTime;
-    private int waitingTime;
-    private int responseTime;
     private int startTime; 
     private int endTime;
 
@@ -50,19 +48,13 @@ public class MyProcess {
     public void increaseTurnAroundTime(int t){
         turnAroundTime += t;
     }
-    public void setResponseTime(int responseTime) {
-        this.responseTime = responseTime;
-    }
     public void setTurnAroundTime(int turnAroundTime) {
         this.turnAroundTime = turnAroundTime;
-    }
-    public void setWaitingTime(int waitingTime) {
-        this.waitingTime = waitingTime;
     }
     public void setEndTime(int endTime) {
         this.endTime = endTime;
     }
-
+    
     public String toString(){
         String s = new String();
 
@@ -74,10 +66,6 @@ public class MyProcess {
         s += "end time: "+ this.endTime+ '\n';
         s += "---------------------\n";
         
-        // s += "turnAroundTime: "+ this.turnAroundTime+ '\n';
-        // s += "responseTime: "+ this.responseTime+ '\n';
-        // s += "waitingTime: "+ this.waitingTime+ '\n';
-        // s += "\n=====================\n";
 
         return s;
     }

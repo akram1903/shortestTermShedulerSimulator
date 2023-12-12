@@ -31,22 +31,16 @@ public class RoundsRobin extends Algorithm {
 	@Override
 	public Queue<MyProcess> run(CollectiveOut collectiveOut,SharedTime t0) {
 		Queue<MyProcess> unfinished = new LinkedList<>();
-		// not terminated yet
-		// refreshQ();
+		
 		System.out.println("\n==================\ninside roundsRobin with quanta:"+this.quanta);
 		System.out.println("==================\n");
 		while(!this.workingQ.isEmpty()) {
 			
 			MyProcess p = workingQ.poll();
-			// arr.remove(p);
-			// System.out.println("start time: "+t0);
+
 			if(p.getArrivalTime()>t0.getTime())
 				t0.setTime(p.getArrivalTime());
 			p.setStartTime(t0.getTime());
-			
-			p.setResponseTime(p.getArrivalTime()-t0.getTime());
-			// p.decreaseBurstTimeBy(this.quanta);
-			
 			
 			
 			if(p.getRemainingBurstTime()>this.quanta){
@@ -64,7 +58,6 @@ public class RoundsRobin extends Algorithm {
 			}
 			System.out.println(p);
 			System.out.println("Time is "+t0.getTime());
-			// refreshQ();
 		
 		}
 		

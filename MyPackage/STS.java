@@ -8,24 +8,23 @@ import MyPackage.algorithms.*;
 public class STS {
     private SharedTime time;
     
-    public STS(/*ArrayList<MyProcess> arr*/){
-        
-        // this.arrivalQueue = new PriorityQueue<MyProcess>(new CompareProcessByArrival());
-
-		// for(MyProcess p:arr){
-		// 	arrivalQueue.add(p);
-		// }
-
+    public STS(){
         time = new SharedTime(0);
     }
-// implementing the 3 level queue
-// level 1 : roundsrobin with quantum 8
-// level 2 : roundsrobin with quantum 16
-// level 3 : FCFS
+/*
+    
+    implementing the 3 level queue
+    level 1 : roundsrobin with quantum 8
+    level 2 : roundsrobin with quantum 16
+    level 3 : FCFS
 
-// Note : there will be a debate on how we take the output to run on cpu
-//       - we can make another FCFS that takes the ready process from each level
-    public void run(){
+    Note : there will be a debate on how we take the output to run on cpu
+        - we can make another CollectiveOut class that takes the ready process from each level
+          and outputs the processes FIFO like
+
+*/
+
+public void run(){
         // GenerateProcesses g = new GenerateProcesses();
         // ArrayList<MyProcess> arr = g.generate(5);
         ArrayList<MyProcess> arr = new ArrayList<>();
