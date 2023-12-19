@@ -1,25 +1,33 @@
 package MyPackage;
+
+import java.time.LocalTime;
+
 public class MyProcess {
     private int PID;
-    private int arrivalTime;
+    private LocalTime arrivalTime;
     private int remainingBurstTime;
     private int burstTime;
+	private int burstAquired;
     private int turnAroundTime;
-    private int startTime; 
-    private int endTime;
+    private LocalTime startTime; 
+    private LocalTime endTime;
+    
 
-    public MyProcess(int arrivalTime,int BurstTime, int PID){
-        if(PID<0 || arrivalTime<0 || BurstTime <0)
-            throw new ArithmeticException("PID, arrival time or burst time is negative");
+	private int availableBurst;
+    public MyProcess(LocalTime arrivalTime,int BurstTime, int PID){
+        if(PID<0 || BurstTime <0)
+            throw new ArithmeticException("PID, burst time is negative");
         this.PID = PID;
         this.remainingBurstTime = BurstTime;
         this.burstTime = BurstTime;
         this.arrivalTime = arrivalTime;
+		this.startTime = null;
+		this.burstAquired=0;
     }
 
     // getters
 
-    public int getArrivalTime() {
+    public LocalTime getArrivalTime() {
         return arrivalTime;
     }
     public int getRemainingBurstTime() {
@@ -28,19 +36,24 @@ public class MyProcess {
     public int getPID() {
         return PID;
     }
-    public int getStartTime() {
+    public LocalTime getStartTime() {
         return startTime;
     }
     public int getTurnAroundTime() {
         return turnAroundTime;
     }
-    public int getEndTime() {
+    public LocalTime getEndTime() {
         return endTime;
     }
-    
+    public int getAvailableBurst() {
+		return availableBurst;
+	}
     // setters
-    public void setStartTime(int startTime) {
-        this.startTime = startTime;
+	public void setBurstAquired(int burstAquired) {
+		this.burstAquired = burstAquired;
+	}
+    public void setStartTime() {
+        this.startTime = LocalTime.now();
     }
     public void decreaseBurstTimeBy(int t){
         remainingBurstTime -= t;
@@ -51,9 +64,12 @@ public class MyProcess {
     public void setTurnAroundTime(int turnAroundTime) {
         this.turnAroundTime = turnAroundTime;
     }
-    public void setEndTime(int endTime) {
-        this.endTime = endTime;
+    public void setEndTime() {
+        this.endTime = LocalTime.now();
     }
+	public void setAvailableBurst(int availableBurst) {
+		this.availableBurst = availableBurst;
+	}
     
     public String toString(){
         String s = new String();
@@ -69,4 +85,31 @@ public class MyProcess {
 
         return s;
     }
+
+	public void excecute(){
+		if (startTime==null)
+			setStartTime();
+		// try {
+		// 	if(this.getRemainingBurstTime()>availableBurst){
+		// 		Thread.sleep(availableBurst*1000);
+		// 	}
+		// 	else{
+		// 		Thread.sleep(remainingBurstTime*1000);
+		// 		this.setEndTime();
+		// 		turnAroundTime = startTime.getSecond()-endTime.getSecond();
+		// }
+		// } catch (Exception e) {
+		// 	System.err.println(e.getMessage());
+		// }
+
+		try {
+			Thread.sleep(burstAquired*1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if(remainingBurstTime==0)
+			this.setEndTime();
+		this.burstAquired=0;
+	}
+  
 }

@@ -1,56 +1,61 @@
 package MyPackage.algorithms;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
 import MyPackage.*;
 import comparing.CompareProcessByArrival;
 
-public class FCFS extends Algorithm{
-
+public class FCFS extends Algorithm implements Runnable{
+	public static int ALL_BURST_TIME = 200;
 	
-	public FCFS(ArrayList<MyProcess> arr){
-		
+	public FCFS(ArrayList<MyProcess> arr,CollectiveOut collectiveOut,Algorithm nextAlgorithm){
+		// this.collectiveOut = cpu;
+		super();
 		this.workingQ = new PriorityQueue<MyProcess>(new CompareProcessByArrival());
-
+		this.collectiveOut = collectiveOut;
 		for(MyProcess p:arr){
 			workingQ.add(p);
 		}
+		this.nextAlgorithm = nextAlgorithm;
 	}
-	public FCFS(Queue<MyProcess> q){
+	public FCFS(Queue<MyProcess> q,CollectiveOut collectiveOut,Algorithm nextAlgorithm){
+		super();
 		this.workingQ = q;
+		this.collectiveOut = collectiveOut;
+		this.nextAlgorithm = nextAlgorithm;
 	}
-	
+	public FCFS(CollectiveOut collectiveOut){
+		super();
+		this.collectiveOut = collectiveOut;
+		this.workingQ = new LinkedList<>();
+	}
 	
 	
 	
 	@Override
-	public Queue<MyProcess> run(CollectiveOut collectiveOut,SharedTime t0) {
-		// System.out.println("\n+++++++++++++++++++++++++++++\nin FCFS");
-		// System.out.println("+++++++++++++++++++++++++++++");
+	public void run() {
+		// isRunning=true;
+			if(!workingQ.isEmpty()){
+				MyProcess p = this.workingQ.poll();
+				System.out.println("next process in FCFS stage ");
+				System.out.println(p.getPID());
+				System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
 
-		while(!workingQ.isEmpty()){
-			
-			MyProcess p = this.workingQ.poll();
-			if(p.getArrivalTime()>t0.getTime())
-				t0.setTime(p.getArrivalTime());
-			
-			
-			t0.increment(p.getRemainingBurstTime());
-
-			if(collectiveOut != null){
-				collectiveOut.push(p);
-			}
-			
-			p.setEndTime(t0.getTime());
-			p.decreaseBurstTimeBy(p.getRemainingBurstTime());
-
-			// System.out.println(p);
-		}
-		return null;
+				p.setAvailableBurst(ALL_BURST_TIME);
+				p.setBurstAquired(p.getRemainingBurstTime());
+				p.decreaseBurstTimeBy(p.getRemainingBurstTime());
 				
+				collectiveOut.push(p,null);
+				
+		}
+		// isRunning=false;
+				
+	
 	}
+		
 
 
 }
