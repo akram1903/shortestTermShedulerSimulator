@@ -41,9 +41,9 @@ public class FCFS extends Algorithm {
 		// isRunning=true;
 			if(!workingQ.isEmpty()){
 				MyProcess p = this.workingQ.poll();
-				System.out.println("next process in FCFS stage ");
-				System.out.println(p.getPID());
-				System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+				// System.out.println("next process in FCFS stage ");
+				// System.out.println(p.getPID());
+				// System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
 
 				p.setAvailableBurst(ALL_BURST_TIME);
 				p.setBurstAquired(p.getRemainingBurstTime());

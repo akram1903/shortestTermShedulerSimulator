@@ -41,9 +41,9 @@ public class RoundsRobin extends Algorithm{
 			if(!workingQ.isEmpty()) {
 				
 				MyProcess p = workingQ.poll();
-				System.out.println("process"+p.getPID()+" is in RR stage "+quanta);
-				// System.out.println(p.getPID());
-				System.out.println("+++++++++++++++++++++++++++++++++++++");
+				// System.out.println("process"+p.getPID()+" is in RR stage "+quanta);
+				// // System.out.println(p.getPID());
+				// System.out.println("+++++++++++++++++++++++++++++++++++++");
 				p.setAvailableBurst(quanta);
 				if(quanta<p.getRemainingBurstTime()){
 					p.decreaseBurstTimeBy(quanta);

@@ -7,6 +7,8 @@ import MyPackage.algorithms.*;
 import comparing.CompareProcessByArrival;
 
 public class STS {
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_RESET = "\u001B[0m";
     private ArrayList<MyProcess> arr;
     
     public STS(ArrayList<MyProcess> arr){
@@ -28,10 +30,10 @@ public class STS {
 
     public void run(){
         
-        arr = new ArrayList<>();
-        arr.add(new MyProcess(LocalTime.now().plusSeconds(0), 3, 0));
-        arr.add(new MyProcess(LocalTime.now().plusSeconds(1), 11, 1));
-        arr.add(new MyProcess(LocalTime.now().plusSeconds(5), 25, 2));
+        // arr = new ArrayList<>();
+        // arr.add(new MyProcess(LocalTime.now().plusSeconds(0), 3, 0));
+        // arr.add(new MyProcess(LocalTime.now().plusSeconds(1), 11, 1));
+        // arr.add(new MyProcess(LocalTime.now().plusSeconds(5), 25, 2));
 
         // Thread co = new Thread();
         CollectiveOut collectiveOut = new CollectiveOut();
@@ -58,12 +60,12 @@ public class STS {
         l3.start();
         // co.start();
 
-        System.out.println("Generated processes:\n");
+        System.out.println(ANSI_RED+"Generated processes:\n"+ANSI_RESET);
         for(MyProcess p:arr){
             
             System.out.println(p);
         }
-        System.out.println("==============================");
+        System.out.println(ANSI_RED+"=============================="+ANSI_RESET);
 
         while (arr.size()>0) {
             while(arr.get(0).getArrivalTime().getSecond()!=LocalTime.now().getSecond());

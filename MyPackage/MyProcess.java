@@ -79,8 +79,9 @@ public class MyProcess {
     
     public String toString(){
         String s = new String();
-        s += ANSI_GREEN;
+        
         s += "Process: "+ this.PID + '\n';
+        s += ANSI_GREEN;
         s += "arrival time: "+ this.arrivalTime+ '\n';
         s += "remaining burst time: "+ this.remainingBurstTime+ '\n';
         s += "burst time: "+ this.burstTime+ '\n';
@@ -89,7 +90,7 @@ public class MyProcess {
 		s += "current time: "+ LocalTime.now() + '\n';
         if(endTime!=null){
             Duration d = Duration.between(arrivalTime, endTime);
-            s += "turnaround time: "+d.toSeconds()+ '\n';
+            s += "turnaround time: "+d.toMillis()/1000.0 + '\n';
         }
         
         s += "---------------------\n";

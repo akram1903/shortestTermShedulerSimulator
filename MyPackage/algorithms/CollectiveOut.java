@@ -20,7 +20,7 @@ public class CollectiveOut implements Runnable{
 	public void push(MyProcess p,Algorithm nextAlg){
 		this.nextAlg=nextAlg;
         q.add(p);
-		System.out.println("thread " +p.getPID()+ " in Collectiveout push");
+		// System.out.println("thread " +p.getPID()+ " in Collectiveout push");
 		try {
 			t.join();
 		} catch (InterruptedException e) {
