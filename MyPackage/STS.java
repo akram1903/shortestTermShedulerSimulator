@@ -33,8 +33,8 @@ public class STS {
         arr.add(new MyProcess(LocalTime.now().plusSeconds(1), 11, 1));
         arr.add(new MyProcess(LocalTime.now().plusSeconds(5), 25, 2));
 
-        Thread co = new Thread();
-        CollectiveOut collectiveOut = new CollectiveOut(co);
+        // Thread co = new Thread();
+        CollectiveOut collectiveOut = new CollectiveOut();
         // co = new Thread((Runnable)collectiveOut);
        
         FCFS level3 = new FCFS(collectiveOut);
@@ -49,14 +49,15 @@ public class STS {
 
         
 
-        // Thread l1 = new Thread((Runnable)level1);
-        // Thread l2 = new Thread((Runnable)level2);
-        // Thread l3 = new Thread((Runnable)level3);
+        Thread l1 = new Thread((Runnable)level1);
+        Thread l2 = new Thread((Runnable)level2);
+        Thread l3 = new Thread((Runnable)level3);
         
-        // l1.start();
-        // l2.start();
-        // l3.start();
+        l1.start();
+        l2.start();
+        l3.start();
         // co.start();
+
         System.out.println("Generated processes:\n");
         for(MyProcess p:arr){
             
@@ -73,19 +74,19 @@ public class STS {
         System.out.println("all processes entered STS");
         System.out.println("|||||||||||||||||||||||||");
 
-        // try {
-        //     // l1.join();
-        //     // l2.join();
-        //     // l3.join();
-        //     co.join();
-        // } catch (InterruptedException e) {
-        //     e.printStackTrace();
-        // }
+        try {
+            l1.join();
+            l2.join();
+            l3.join();
+            // co.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         
         
-        // System.out.println(" ===================================");
-        // System.out.println("|| STS ended its task successfully ||");
-        // System.out.println(" ===================================\n");
+        System.out.println(" ===================================");
+        System.out.println("|| STS ended its task successfully ||");
+        System.out.println(" ===================================\n");
     }
 
 }

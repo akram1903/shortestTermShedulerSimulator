@@ -1,8 +1,13 @@
 package MyPackage;
 
+import java.time.Duration;
 import java.time.LocalTime;
 
 public class MyProcess {
+    // ANSI color codes
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+
     private int PID;
     private LocalTime arrivalTime;
     private int remainingBurstTime;
@@ -12,6 +17,7 @@ public class MyProcess {
     private LocalTime startTime; 
     private LocalTime endTime;
     
+
 
 	private int availableBurst;
     public MyProcess(LocalTime arrivalTime,int BurstTime, int PID){
@@ -73,14 +79,21 @@ public class MyProcess {
     
     public String toString(){
         String s = new String();
-
+        s += ANSI_GREEN;
         s += "Process: "+ this.PID + '\n';
         s += "arrival time: "+ this.arrivalTime+ '\n';
         s += "remaining burst time: "+ this.remainingBurstTime+ '\n';
         s += "burst time: "+ this.burstTime+ '\n';
                 
         s += "end time: "+ this.endTime+ '\n';
+		s += "current time: "+ LocalTime.now() + '\n';
+        if(endTime!=null){
+            Duration d = Duration.between(arrivalTime, endTime);
+            s += "turnaround time: "+d.toSeconds()+ '\n';
+        }
+        
         s += "---------------------\n";
+        s += ANSI_RESET;
         
 
         return s;

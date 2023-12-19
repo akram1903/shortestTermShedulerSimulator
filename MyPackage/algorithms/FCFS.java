@@ -8,7 +8,7 @@ import java.util.Queue;
 import MyPackage.*;
 import comparing.CompareProcessByArrival;
 
-public class FCFS extends Algorithm implements Runnable{
+public class FCFS extends Algorithm {
 	public static int ALL_BURST_TIME = 200;
 	
 	public FCFS(ArrayList<MyProcess> arr,CollectiveOut collectiveOut,Algorithm nextAlgorithm){
@@ -37,6 +37,7 @@ public class FCFS extends Algorithm implements Runnable{
 	
 	@Override
 	public void run() {
+		while(true){
 		// isRunning=true;
 			if(!workingQ.isEmpty()){
 				MyProcess p = this.workingQ.poll();
@@ -50,6 +51,12 @@ public class FCFS extends Algorithm implements Runnable{
 				
 				collectiveOut.push(p,null);
 				
+			}
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 		// isRunning=false;
 				

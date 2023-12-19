@@ -9,9 +9,10 @@ public class CollectiveOut implements Runnable{
     private Queue<MyProcess> q;
 	private Thread t;
 	private Algorithm nextAlg;
-    public CollectiveOut(Thread t){
+    public CollectiveOut(){
 		q = new LinkedList<MyProcess>();
-		this.t=t;
+		t = new Thread();
+	
 		// isRunning = false;
 	}
 	
@@ -19,21 +20,27 @@ public class CollectiveOut implements Runnable{
 	public void push(MyProcess p,Algorithm nextAlg){
 		this.nextAlg=nextAlg;
         q.add(p);
-		System.out.println("in Collectiveout push");
-		if(!t.isAlive()){
+		System.out.println("thread " +p.getPID()+ " in Collectiveout push");
+		try {
+			t.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 			t = new Thread(this);
 			t.start();
-			try {
-				t.join();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
+			// try {
+			// 	t.join();
+			// } catch (InterruptedException e) {
+			// 	e.printStackTrace();
+			// }
+			
+		
     }
 	@Override
 	public void run() {
 		// isRunning=true;
-
+		
+		// while(true){
 			if(!q.isEmpty()){
 				MyProcess p = this.q.poll();
 				p.excecute();
@@ -44,11 +51,12 @@ public class CollectiveOut implements Runnable{
 				}
 				
 			}
-			// try {
-			// 	Thread.sleep(10);
-			// } catch (InterruptedException e) {
-			// 	e.printStackTrace();
-			// }
+		// 	try {
+		// 		Thread.sleep(10);
+		// 	} catch (InterruptedException e) {
+		// 		e.printStackTrace();
+		// 	}
+		// }
 		
 		
 		// isRunning=false;	

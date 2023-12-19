@@ -1,14 +1,10 @@
 package MyPackage.algorithms;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.Queue;
 
 import MyPackage.MyProcess;
-import comparing.CompareProcessByArrival;
 
-public class RoundsRobin extends Algorithm implements Runnable{
+public class RoundsRobin extends Algorithm{
 	private int quanta;
 
 	// public RoundsRobin(ArrayList<MyProcess> arr,int quanta,CollectiveOut collectiveOut,Algorithm nexAlgorithm){
@@ -41,11 +37,12 @@ public class RoundsRobin extends Algorithm implements Runnable{
 		// isRunning=true;
 		// System.out.println("\n==================\ninside roundsRobin with quanta:"+this.quanta);
 		// System.out.println("==================\n");
+		while(true){
 			if(!workingQ.isEmpty()) {
 				
 				MyProcess p = workingQ.poll();
-				System.out.println("next process is in RR stage "+quanta);
-				System.out.println(p.getPID());
+				System.out.println("process"+p.getPID()+" is in RR stage "+quanta);
+				// System.out.println(p.getPID());
 				System.out.println("+++++++++++++++++++++++++++++++++++++");
 				p.setAvailableBurst(quanta);
 				if(quanta<p.getRemainingBurstTime()){
@@ -59,7 +56,12 @@ public class RoundsRobin extends Algorithm implements Runnable{
 				collectiveOut.push(p, nextAlgorithm);
 			
 			}
-			
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 		// isRunning=false;
 		
 	}

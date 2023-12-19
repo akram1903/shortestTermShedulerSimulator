@@ -18,8 +18,8 @@ public abstract class Algorithm implements Runnable{
         // System.out.println("in pushInQueue");
         workingQ.add(p);
         // if(!isRunning){
-        Thread t = new Thread((Runnable)this);
-        t.start();
+        // Thread t = new Thread((Runnable)this);
+        // t.start();
         // }
         
         // run();
